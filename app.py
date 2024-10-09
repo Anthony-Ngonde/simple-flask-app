@@ -1,6 +1,32 @@
 from flask import Flask, render_template, url_for
+from flask_sqlalchemy import SQLAlchemy
+import os
+
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+
+# print("\n ", BASE_DIR)
+
 
 app = Flask(__name__)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(BASE_DIR, 'site.sqlite3')
+
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db = SQLAlchemy(app)
+
+
+class Employee(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    first_name = db.Column(db.String(25), nullable=False)
+    first_name = db.Column(db.String(25), nullable=False)
+    email = db.Column(db.String(25), nullable=False)
+
+    def __init__(self, first_name, last_name, email):
+        self.first_name =first_name
+        self.last_name = last_name
+        self.email = email
+        
 
 # app.debug = True
 
