@@ -13,20 +13,22 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(BASE_DIR, 's
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+app.config["SQLALCHEMY_ECHO"] = True
+
 db = SQLAlchemy(app)
 
 
 class Employee(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     first_name = db.Column(db.String(25), nullable=False)
-    first_name = db.Column(db.String(25), nullable=False)
+    last_name = db.Column(db.String(25), nullable=False)
     email = db.Column(db.String(25), nullable=False)
 
     def __init__(self, first_name, last_name, email):
         self.first_name =first_name
         self.last_name = last_name
         self.email = email
-        
+
 
 # app.debug = True
 
@@ -51,4 +53,6 @@ def show_info(name,age):
 
 
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all() 
     app.run(debug=True)
