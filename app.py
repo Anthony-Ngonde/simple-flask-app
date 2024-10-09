@@ -4,19 +4,13 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
-# print("\n ", BASE_DIR)
-
-
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(BASE_DIR, 'site.sqlite3')
-
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
 app.config["SQLALCHEMY_ECHO"] = True
 
 db = SQLAlchemy(app)
-
 
 class Employee(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
@@ -25,34 +19,27 @@ class Employee(db.Model):
     email = db.Column(db.String(25), nullable=False)
 
     def __init__(self, first_name, last_name, email):
-        self.first_name =first_name
+        self.first_name = first_name
         self.last_name = last_name
         self.email = email
-
-
-# app.debug = True
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
 @app.route('/about')
 def about():
     return render_template('about.html')
-
 
 @app.route('/hello/<name>')
 def greet(name):
     return f"Hello {name}"
 
-
 @app.route('/age/<string:name>/<int:age>')
-def show_info(name,age):
+def show_info(name, age):
     return f"{name} is {age} years old"
 
-
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all() 
+    with app.app_context():  # Create an application context
+        db.create_all()  # Create the database tables
     app.run(debug=True)
