@@ -53,6 +53,19 @@ def add_employee():
     
     return render_template('add.html')
 
+
+@app.route('/update/<int:id>')
+def update_employee(id):
+    employee_to_be_updated = Employee.query.get_or_404(id)
+
+    context={
+        'employee':employee_to_be_updated
+    }
+
+    return render_template('update.html', **context)
+
+
+
 @app.route('/hello/<name>')
 def greet(name):
     return f"Hello {name}"

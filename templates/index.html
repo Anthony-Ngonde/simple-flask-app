@@ -14,6 +14,8 @@
                 <td>{{employee.first_name}}</td>
                 <td>{{employee.last_name}}</td>
                 <td>{{employee.email}}</td>
+                <td><a href="{{url_for('update_employee',id=employee.id)}}">update</a></td>
+                <td><a href="">delete</a></td>
             </tr>
             {% endfor %}
         </tbody>
