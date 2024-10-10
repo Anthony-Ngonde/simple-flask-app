@@ -26,10 +26,16 @@ class Employee(db.Model):
 
     def __repr__(self):
         return f"<Employee {self.first_name}"
+    
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    employees = Employee.query.all()
+    context={
+        'employees':employees
+    }
+    return render_template('index.html', **context)
+
 
 @app.route('/about')
 def about():
