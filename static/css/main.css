@@ -24,3 +24,10 @@ nav{
 nav a{
     color: white;
 }
+
+th,td{
+    width: 200px;
+    padding: 20px;
+    border: 1px solid black;
+}
+

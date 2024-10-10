@@ -37,9 +37,9 @@ def index():
     return render_template('index.html', **context)
 
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
+@app.route('/add')
+def add_employee():
+    return render_template('add.html')
 
 @app.route('/hello/<name>')
 def greet(name):
