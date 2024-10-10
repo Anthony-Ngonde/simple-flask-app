@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -39,6 +39,18 @@ def index():
 
 @app.route('/add', methods=["GET","POST"])
 def add_employee():
+    if request.method == "POST":
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        email = request.form.get('email')
+
+        new_employee = Employee(first_name=first_name, last_name=last_name, email=email)
+        db.session.add(new_employee)
+        db.session.commit()
+
+        return redirect(url_for('index'))
+
+    
     return render_template('add.html')
 
 @app.route('/hello/<name>')
