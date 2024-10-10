@@ -18,10 +18,14 @@ class Employee(db.Model):
     last_name = db.Column(db.String(25), nullable=False)
     email = db.Column(db.String(25), nullable=False)
 
+
     def __init__(self, first_name, last_name, email):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
+
+    def __repr__(self):
+        return f"<Employee {self.first_name}"
 
 @app.route('/')
 def index():
@@ -40,6 +44,6 @@ def show_info(name, age):
     return f"{name} is {age} years old"
 
 if __name__ == "__main__":
-    with app.app_context():  # Create an application context
-        db.create_all()  # Create the database tables
+    with app.app_context():  
+        db.create_all()  
     app.run(debug=True)
