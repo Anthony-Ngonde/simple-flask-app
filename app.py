@@ -76,6 +76,16 @@ def update_employee(id):
     return render_template('update.html', **context)
 
 
+@app.route('/delete/<int:id>')
+def delete_employee(id):
+    employee_to_delete = Employee.query.get_or_404(id)
+
+    db.session.delete(employee_to_delete) 
+
+    db.session.commit()
+
+    return redirect(url_for('index'))
+
 
 @app.route('/hello/<name>')
 def greet(name):
