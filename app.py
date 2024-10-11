@@ -54,9 +54,20 @@ def add_employee():
     return render_template('add.html')
 
 
-@app.route('/update/<int:id>')
+@app.route('/update/<int:id>', methods = ['GET','POST'])
 def update_employee(id):
     employee_to_be_updated = Employee.query.get_or_404(id)
+
+    if request.method == "POST":
+        employee_to_be_updated.first_name = request.form.get('first_name')
+
+        employee_to_be_updated.last_name = request.form.get('last_name')
+
+        employee_to_be_updated.email = request.form.get('email')
+
+        db.session.commit()
+
+        return redirect(url_for('index'))
 
     context={
         'employee':employee_to_be_updated
