@@ -61,5 +61,11 @@ input[type="submit"]{
     width: 50%;
     margin: 80px;
     padding: 20px;
-    
+
+}
+
+.alert{
+    padding: 20px;
+    background: lightgreen;
+    color: green;
 }

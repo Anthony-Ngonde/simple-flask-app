@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -48,6 +48,8 @@ def add_employee():
         db.session.add(new_employee)
         db.session.commit()
 
+        flash("Employee added successfully")
+
         return redirect(url_for('index'))
 
     
@@ -67,6 +69,8 @@ def update_employee(id):
 
         db.session.commit()
 
+        flash("Employee updated successfully")
+
         return redirect(url_for('index'))
 
     context={
@@ -83,6 +87,8 @@ def delete_employee(id):
     db.session.delete(employee_to_delete) 
 
     db.session.commit()
+
+    flash("Employee deleted successfully")
 
     return redirect(url_for('index'))
 
